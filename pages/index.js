@@ -1,3 +1,7 @@
 export default function Home() {
-  return <div>hello world</div>;
+  return (
+    <div className='border-8 border-red-800' z>
+      hello world
+    </div>
+  );
 }
