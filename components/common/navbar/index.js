@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 export default function Navbar() {
   return (
     <section>
@@ -5,38 +7,40 @@ export default function Navbar() {
         <nav className='relative' aria-label='Global'>
           <div className='flex justify-between'>
             <div>
-              <a
-                href='#'
+              <Link
+                href='/home'
                 className='font-medium mr-8 text-gray-500 hover:text-gray-900'
               >
-                Product
-              </a>
-              <a
-                href='#'
-                className='font-medium mr-8 text-gray-500 hover:text-gray-900'
-              >
-                Features
-              </a>
-              <a
-                href='#'
+                Home
+              </Link>
+              <Link
+                href='/marketplace'
                 className='font-medium mr-8 text-gray-500 hover:text-gray-900'
               >
                 Marketplace
-              </a>
-            </div>
-            <div>
-              <a
-                href='#'
+              </Link>
+              <Link
+                href='/blogs'
                 className='font-medium mr-8 text-gray-500 hover:text-gray-900'
               >
-                Company
-              </a>
-              <a
-                href='#'
-                className='font-medium mr-8 text-indigo-600 hover:text-indigo-500'
+                Blogs
+              </Link>
+            </div>
+            <div className='flex gap-2'>
+              <Link
+                href='/wishlist'
+                className='font-medium mr-8 text-gray-500 hover:text-gray-900'
               >
-                Log in
-              </a>
+                Wishlist
+              </Link>
+              <div className='rounded-md shadow flex items-center justify-center overflow-hidden '>
+                <Link
+                  href='/login'
+                  className='flex items-center justify-center rounded-md px-8 py-3 border text-base font-medium text-white bg-indigo-600 hover:bg-indigo-500'
+                >
+                  Connect Wallet
+                </Link>
+              </div>
             </div>
           </div>
         </nav>
