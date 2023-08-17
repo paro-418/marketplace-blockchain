@@ -1,21 +1,12 @@
 import Link from 'next/link';
 import { Button } from '@components/ui/common';
 import { useWeb3 } from '@components/providers';
-import { useEffect, useState } from 'react';
-import { useAccount } from '@components/web3/hooks/useAccount';
+import { useAccount } from '@components/hooks/web3/useAccount';
 
 export default function Navbar() {
   const { connect, isWeb3Loaded, isLoading } = useWeb3();
   const { account } = useAccount();
-  const [currentAccount, setCurrentAccount] = useState(null);
 
-  // useEffect(() => {
-  //   if (!web3) return;
-  //   const { account } = hooks.useAccount();
-  //   setCurrentAccount(account);
-  // }, [web3, hooks]);
-
-  console.log(account);
   return (
     <section>
       <div className='relative pt-6 px-4 sm:px-6 lg:px-8'>
@@ -52,13 +43,13 @@ export default function Navbar() {
               {isLoading ? (
                 <Button disabled={true}>Loading...</Button>
               ) : isWeb3Loaded ? (
-                account ? (
+                account.data ? (
                   <Button
                     className='cursor-default '
                     callFunction={connect}
                     hoverable={false}
                   >
-                    Hi there
+                    Hi there {account.isAdmin && ' Admin'}
                   </Button>
                 ) : (
                   <Button callFunction={connect}>Connect Wallet</Button>
@@ -77,6 +68,13 @@ export default function Navbar() {
           </div>
         </nav>
       </div>
+      {account.data && (
+        <div className='flex justify-end pt-2 sm:px-6 lg:px-8'>
+          <div className='text-white bg-indigo-600 rounded-md p-2'>
+            {account.data}
+          </div>
+        </div>
+      )}
     </section>
   );
 }
