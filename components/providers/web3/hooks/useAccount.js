@@ -20,11 +20,9 @@ export const handler = (web3, provider) => () => {
   }, [mutate]);
 
   return {
-    account: {
-      data,
-      isAdmin: (data && ADMIN_ADDRESS[web3.utils.keccak256(data)]) ?? false,
-      mutate,
-      ...rest,
-    },
+    data,
+    isAdmin: (data && ADMIN_ADDRESS[web3.utils.keccak256(data)]) ?? false,
+    mutate,
+    ...rest,
   };
 };
