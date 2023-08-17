@@ -13,8 +13,11 @@ const NETWORKS = {
   11155111: 'Sepolia Test Network',
   59140: 'Linea Goerli Test Network',
 };
+
+const targetNetwork = NETWORKS[process.env.NEXT_PUBLIC_TARGET_CHAIN_ID];
+
 export const handler = (web3, provider) => () => {
-  const { mutate, ...rest } = useSWR(
+  const { mutate, error, data, ...rest } = useSWR(
     () => (web3 ? 'web3/network' : null),
     async () => NETWORKS[await web3.eth.getChainId()]
   );
@@ -27,6 +30,13 @@ export const handler = (web3, provider) => () => {
   }, [mutate]);
 
   return {
-    network: { mutate, ...rest },
+    network: {
+      data,
+      target: targetNetwork,
+      isSupported: data === targetNetwork,
+      mutate,
+      hasFinishedFirstFetch: data || error,
+      ...rest,
+    },
   };
 };

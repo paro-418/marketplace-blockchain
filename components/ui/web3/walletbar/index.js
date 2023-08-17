@@ -1,4 +1,7 @@
-export default function WalletBar({ account, network }) {
+export default function WalletBar({
+  account,
+  network: { data, isSupported, target, hasFinishedFirstFetch },
+}) {
   return (
     <section className='text-white bg-indigo-600'>
       <div className='p-8'>
@@ -18,10 +21,18 @@ export default function WalletBar({ account, network }) {
             </div>
           </div>
           <div>
-            <div>
-              <span>Currently on </span>
-              <strong className='text-2xl'>{network}</strong>
-            </div>
+            {!isSupported && hasFinishedFirstFetch && (
+              <div className='bg-red-400 p-4 rounded-lg'>
+                <div>Connected to wrong network</div>
+                <div>Connect to : {target}</div>
+              </div>
+            )}
+            {data && (
+              <div>
+                <span>Currently on </span>
+                <strong className='text-2xl'>{data}</strong>
+              </div>
+            )}
           </div>
         </div>
       </div>
