@@ -1,4 +1,3 @@
-import { CourseCard } from '@components/ui/course';
 
 export default function List({ courses, children }) {
   return (
